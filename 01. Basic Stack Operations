@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _01.Basic_Stack_Operations
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] commands = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+
+            int[] numbers = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+
+            Stack<int> goodJob = new Stack<int>();
+
+            int n = commands[0];
+            int s = commands[1];
+            int x = commands[2];
+
+            for (int i = 0; i < n; i++)
+            {
+                goodJob.Push(numbers[i]);
+            }
+
+            for (int i = 0; i < s; i++)
+            {
+                goodJob.Pop();
+            }
+            if (goodJob.Any())
+            {
+                if (goodJob.Contains(x))
+                {
+                    Console.WriteLine("true");
+                }
+                else
+                {
+                    Console.WriteLine(goodJob.Min());
+                }
+            }
+            else
+            {
+                Console.WriteLine(0);
+            }
+        }
+    }
+}
