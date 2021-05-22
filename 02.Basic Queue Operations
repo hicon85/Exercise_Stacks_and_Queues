@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _02.Basic_Queue_Operations
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] command = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+
+            int[] number = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+
+            int n = command[0];
+            int s = command[1];
+            int x = command[2];
+
+            Queue<int> goodJob = new Queue<int>();
+
+            EnqueElements(goodJob, number, n);
+            DequeElemetns(goodJob, s);
+            Checked(goodJob,x);
+        }
+
+        private static Queue<int> Checked(Queue<int> goodJob, int command)
+        {
+            if (goodJob.Any())
+            {
+                if (goodJob.Contains(command))
+                {
+                    Console.WriteLine("true");
+                }
+                else
+                {
+                    Console.WriteLine(goodJob.Min());
+                }
+            }
+            else
+            {
+                Console.WriteLine(0);
+            }
+            return goodJob;
+        }
+
+        private static Queue<int> DequeElemetns(Queue<int> goodJob, int command)
+        {
+            for (int i = 0; i < command; i++)
+            {
+                goodJob.Dequeue();
+            }
+            return goodJob;
+        }
+
+        private static Queue<int> EnqueElements(Queue<int> goodJob, int[] number, int command)
+        {
+            for (int i = 0; i < command; i++)
+            {
+                goodJob.Enqueue(number[i]);
+            }
+            return goodJob;
+        }
+    }
+}
