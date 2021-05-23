@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _05.Fashion_Boutique
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] valume = Console.ReadLine()
+                 .Split()
+                 .Select(int.Parse)
+                 .ToArray();
+
+            int capacity = int.Parse(Console.ReadLine());
+
+            int rack = 0;
+            int sum = 0;
+
+            Stack<int> box = new Stack<int>(valume);
+
+            while (box.Count > 0)
+            {
+                int currentSize = sum + box.Peek();
+
+                if(currentSize < capacity)
+                {
+                    sum += box.Pop();
+                }
+                else if(currentSize == capacity)
+                {
+                    rack++;
+                    box.Pop();
+                    sum = 0;
+                }
+                else
+                {
+                    rack++;
+                    sum = box.Pop();
+                }
+            }
+
+            if(sum > 0)
+            {
+                rack++;
+            }
+
+            Console.WriteLine(rack);
+        }
+    }
+}
