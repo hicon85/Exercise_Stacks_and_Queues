@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _06.Songs_Queue
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] songs = Console.ReadLine()
+                 .Split(", ");
+
+            Queue<string> queue = new Queue<string>();
+
+            foreach (string veribal in songs)
+            {
+                queue.Enqueue(veribal);
+            }
+
+            while (queue.Count > 0)
+            {
+                string cmd = Console.ReadLine();
+                if(cmd == "Play")
+                {
+                    queue.Dequeue();
+                }
+                else if(cmd == "Show")
+                {
+                    Console.WriteLine(string.Join(", ", queue));
+                }
+
+                else
+                {
+                    int index = cmd.IndexOf(' ');
+                    string soung = cmd.Substring(index + 1);
+
+                    if (queue.Contains(soung))
+                    {
+                        Console.WriteLine($"{soung} is already contained!");
+                    }
+                    else
+                    {
+                        queue.Enqueue(soung);
+                    }
+                }
+
+            }
+            Console.WriteLine("No more songs!");
+        }
+    }
+}
